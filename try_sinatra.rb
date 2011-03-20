@@ -80,7 +80,7 @@ class TrySinatra < Sinatra::Base
     project.sanitize!
     
     begin
-      result = `cd #{PROJECTS_SRC}/#{project} && git add * && git commit -m "pushing from TrySinatra" && git push origin master && heroku deploy`
+      result = `cd #{PROJECTS_SRC}/#{project} && git add * && git commit -m "pushing from TrySinatra" && git push heroku master && heroku deploy`
       puts "push: #{result}"
     rescue Exception => e
       error = e

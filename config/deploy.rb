@@ -43,6 +43,11 @@ namespace :deploy do
     run "touch #{current_path}/tmp/restart.txt"
   end
   
+  desc "Create some symlinks from shared to public"
+  task :create_symlinks do
+    run "cd #{current_path}/public; ln -s #{deploy_to}/shared/project_src project_src"
+  end
+  
 end
 
 namespace :bundle do
