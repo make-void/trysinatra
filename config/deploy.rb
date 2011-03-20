@@ -34,6 +34,7 @@ role :db,  domain, :primary => true
 
 
 after :deploy, "deploy:cleanup"
+after :deploy, "deploy:create_symlinks"
 #after :deploy, "db:seeds"
 
 namespace :deploy do
