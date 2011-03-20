@@ -1,0 +1,7 @@
+%ul.jqueryFileTree{ style: "display: none" }
+  - @dirs.each do |dir|
+    %li.directory.collapsed
+      - link_to dir, "#", rel: "#{@dir}/#{dir}/"
+  - @files.each do |file|
+    %li{ class: "file ext_#{File.extname(file)[1..-1]}"}
+      - link_to file, "#", rel: "#{@dir}/#{file}"

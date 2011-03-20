@@ -1,0 +1,29 @@
+-# default themes and modes
+- themes = %w(twilight)
+- modes = %w(javascript ruby html xml css)
+
+#ace_container
+  %pre#editor
+    :preserve
+      #{@contents}    
+  %script{:charset => "utf-8", :src => "/js/ace/ace.js", :type => "text/javascript"}
+  - themes.each do |theme|
+    %script{:charset => "utf-8", :src => "/js/ace/theme-#{theme}.js", :type => "text/javascript"}
+  - modes.each do |mode|
+    %script{:charset => "utf-8", :src => "/js/ace/mode-#{mode}.js", :type => "text/javascript"}
+
+
+%ul.nav
+  %li#filelist_btn Toggle Filelist
+  %li#save_btn Save File
+  %li#push_btn Push & Deploy  
+  %li#preview_btn Preview
+  
+
+  
+#filelist
+  #filetree.demo
+  
+#project{ :"data-name" => "" }
+#file{ :"data-name" => "", :"data-path" => "" }
+  
