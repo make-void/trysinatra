@@ -79,12 +79,15 @@ class TrySinatra < Sinatra::Base
   post "/projects/*/push" do |project|
     project.sanitize!
     
-    begin
-      result = `cd #{PROJECTS_SRC}/#{project} && git add * && git commit -m "pushing from TrySinatra" && git push heroku master && heroku deploy`
+    # begin
+      # login
+      # add key ( heroku keys:add )
+      
+      result = `cd #{PROJECTS_SRC}/#{project} && git add * && git commit -m "pushing from TrySinatra" && git push heroku master`
       puts "push: #{result}"
-    rescue Exception => e
-      error = e
-    end
+    # rescue Exception => e
+    #   error = e
+    # end
     
     response = if error.nil?
       # { file:  }
