@@ -78,7 +78,7 @@ class TrySinatra < Sinatra::Base
   
   post "/projects/*/push" do |project|
     project.sanitize!
-    
+    error = nil
     # begin
       # login
       # add key ( heroku keys:add )
