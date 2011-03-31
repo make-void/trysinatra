@@ -72,7 +72,9 @@ class TrySinatra < Sinatra::Base
     { project: { name: project }, file: { contents: contents, path: file, name: File.basename(file) } }.to_json
   end
 
-
+  get '/projects/*/log' do
+    `cd #{APP_PATH}/public/projects_src/testroku; heroku logs`
+  end
 
   # heroku
   
