@@ -8,7 +8,15 @@ $(function(){
   // ace editor
   
   var editor = ""
-  window.onload = summon_editor
+  if ($.browser.ipad || document.URL.match(/\?ipad/) )
+    window.onload = summon_editor_ipad
+  else
+    window.onload = summon_editor
+
+  function summon_editor_ipad() {
+    file = $("pre#editor").text()
+    $("pre#editor").html("<textarea id='ed_content'>"+file+"</textarea>")
+  }
 
   function summon_editor() {
     editor = ace.edit("editor")

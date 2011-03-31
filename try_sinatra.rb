@@ -80,8 +80,20 @@ class TrySinatra < Sinatra::Base
     project.sanitize!
     error = nil
     # begin
+      # TODO: implement this workflow
+      #
       # login
       # add key ( heroku keys:add )
+      # project = "testroku2"
+      # "mkdir -p #{project}"
+      # "heroku create #{project}"
+      # 
+      # create basic files (Gemfile, config.ru, #{project}.rb)
+      
+      # ...  
+      
+      # destroy
+      # heroku destroy --app testroku2 --confirm testroku2
       
       result = `cd #{PROJECTS_SRC}/#{project} && git add * && git commit -m "pushing from TrySinatra" && git push heroku master`
       puts "push: #{result}"
