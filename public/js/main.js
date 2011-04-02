@@ -54,6 +54,20 @@ $(function(){
      }, "json")
   }
   
+  // FIXME: refactor these two
+  
+  function git_pull() {
+    $.post("/projects/"+project+"/pull", {}, function(data) {
+      var status = ""
+      if (data.message)
+        status = data.message
+      else
+        status = "Got an error: "+data.error
+        
+      update_status(status)
+    }, "json")
+  }
+  
   function push_to_heroku() {
     $.post("/projects/"+project+"/push", {}, function(data) {
       var status = ""
@@ -68,14 +82,14 @@ $(function(){
   
   $('#log_btn').click(function(){
     project = $("#project").attr("data-name")
-    document.location = http_host+"/projects/"+project+"/log"
+    document.location = "/projects/"+project+"/log"
   })
   
   
   $('#pull_btn').click(function(){
-    update_status("pushing to heroku...")
+    update_status("pulling from git...")
 
-     push_to_heroku()
+     git_pull()
   })
   
   $('#push_btn').click(function() {

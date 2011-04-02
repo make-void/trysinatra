@@ -73,30 +73,51 @@ class TrySinatra < Sinatra::Base
   end
 
   get '/projects/*/log' do
-    `cd #{APP_PATH}/public/projects_src/testroku; heroku logs`
+    logs = `cd #{APP_PATH}/public/projects_src/testroku; heroku logs`
+    logs.split("\n").join("<br>")
   end
 
-  # heroku
+  # git/heroku
+  ##################################
+  # TODO: implement this workflow
+  #
+  # login
+  # add key ( heroku keys:add )
+  # project = "testroku2"
+  # "mkdir -p #{project}"
+  # "heroku create #{project}"
+  # 
+  # create basic files (Gemfile, config.ru, #{project}.rb)
+  
+  # ...  
+  
+  # destroy
+  # heroku destroy --app testroku2 --confirm testroku2
+  
+  post "/projects/*/pull" do |project|
+    project.sanitize!
+    error = nil  
+    
+    # begin      
+      result = `cd #{PROJECTS_SRC}/#{project} && git pull heroku master`
+      puts "push: #{result}"
+    # rescue Exception => e
+    #   error = e
+    # end
+    
+    response = if error.nil?
+      { message: "Git pull successful." }
+    else
+      { error: "Cannot pull from git. #{error.message}" } # TODO: report right exception
+    end
+    response.to_json  
+  end
   
   post "/projects/*/push" do |project|
     project.sanitize!
     error = nil
-    # begin
-      # TODO: implement this workflow
-      #
-      # login
-      # add key ( heroku keys:add )
-      # project = "testroku2"
-      # "mkdir -p #{project}"
-      # "heroku create #{project}"
-      # 
-      # create basic files (Gemfile, config.ru, #{project}.rb)
-      
-      # ...  
-      
-      # destroy
-      # heroku destroy --app testroku2 --confirm testroku2
-      
+    
+    # begin      
       result = `cd #{PROJECTS_SRC}/#{project} && git add * && git commit -m "pushing from TrySinatra" && git push heroku master`
       puts "push: #{result}"
     # rescue Exception => e
