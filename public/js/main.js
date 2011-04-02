@@ -66,6 +66,18 @@ $(function(){
     }, "json")
   }
   
+  $('#log_btn').click(function(){
+    project = $("#project").attr("data-name")
+    document.location = http_host+"/projects/"+project+"/log"
+  })
+  
+  
+  $('#pull_btn').click(function(){
+    update_status("pushing to heroku...")
+
+     push_to_heroku()
+  })
+  
   $('#push_btn').click(function() {
     update_status("pushing to heroku...")
     
@@ -84,7 +96,7 @@ $(function(){
   
   $('#preview_btn').click(function() {
     project = $("#project").attr("data-name")
-    window.open("http://"+project+".heroku.com")
+    document.location = "http://"+project+".heroku.com"
   });
   
   // jQuery filetree

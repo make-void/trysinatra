@@ -2,3 +2,4 @@
 .log
 .sqlite
 .pid
+public/projects_src/*

@@ -51,6 +51,19 @@ namespace :deploy do
   
 end
 
+namespace :trysinatra do
+  desc "copies projects todev"
+  task :todev do
+    run "cd #{current_path}/public/projects_src/; tar -czf testroku.tgz testroku" # pf?
+    run "mv #{current_path}/public/projects_src/testroku.tgz /tmp/" 
+    download "/tmp/testroku.tgz", "public/projects_src/testroku.tgz"
+    run "rm -f /tmp/testroku.tgz"
+
+    puts `cd #{Dir.pwd}/public/projects_src; tar -xzf testroku.tgz`
+    puts `rm -f #{Dir.pwd}/public/projects_src/testroku.tgz`
+  end
+end
+
 namespace :bundle do
   desc "Install gems with bundler"
   task :install do
