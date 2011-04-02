@@ -24,8 +24,12 @@
 
   
 #filelist
+  %ul#pane{ style: "display: none" }
+    %li.delete Delete File
+    %li.new New Folder
   #filetree.demo
   
 #project{ :"data-name" => "" }
 #file{ :"data-name" => "", :"data-path" => "" }
+#selection{ :"data-path" => ""  }
   

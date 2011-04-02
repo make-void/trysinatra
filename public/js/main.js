@@ -134,4 +134,54 @@ $(function(){
       })
     }
   )
+  
+  function detect_path(self){
+    return $(self).find("a").attr("rel")
+  }
+  
+  // right click (new file / new folder / delete file)
+  $('#filetree li').live("mousedown", function(event) {
+    
+    
+    if (event.which == 3) { // right click
+      path = detect_path(this)
+      // console.log(path)
+      $("#selection").attr("data-path", path)
+      $("#filelist #pane").fadeIn("fast")
+      $("#filelist #pane").css("left", event.pageX-20)
+      $("#filelist #pane").css("top", event.pageY-70)
+    } else {
+      $("#filelist #pane").fadeOut('fast')
+    }
+    
+    event.stopPropagation()
+    event.preventDefault()
+    return false
+  })
+  
+  $('#filetree li').live("contextmenu", function(event){
+    //console.log(event)
+    event.stopPropagation()
+    event.preventDefault()
+    return false
+  })
+  
+  $('#filelist .new').live("click", function(event){
+    path = ""
+    splits = $("#selection").attr("data-path").split(/\//)
+    for (var i=0; i+1 < splits.length; i++) {
+      if (path != "")
+        path += "/" 
+      path += splits[i]
+    }
+    console.log("creating new folder in: "+path)
+  })
+  $('#filelist .delete').live("click", function(event){
+    path = $("#selection").attr("data-path")
+    console.log("deleting: "+path)
+  })
+//  document.oncontextmenu = function(event){
+//    console.log(event)
+//  }
+  
 })
