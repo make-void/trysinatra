@@ -129,9 +129,18 @@ $(function(){
         $("#file").attr("data-contents", file_contents)
         $("#project").attr("data-name", data.project.name)
         $("#file").attr("data-name", data.file.name)
-        $("#file").attr("data-path", data.file.path)
-  
-        summon_editor()
+
+        // $("#file").attr("data-path", data.file.path)
+        //   
+        // summon_editor()
+        
+        $("#file").attr("data-path", data.file.path)        
+        
+        //refactor me
+        if ($.browser.ipad || document.URL.match(/\?ipad/) )
+          summon_editor_ipad()
+        else
+          summon_editor()
       })
     }
   )
