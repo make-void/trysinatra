@@ -129,7 +129,8 @@ $(function(){
         $("#file").attr("data-contents", file_contents)
         $("#project").attr("data-name", data.project.name)
         $("#file").attr("data-name", data.file.name)
-        $("#file").attr("data-path", data.file.path)        
+        $("#file").attr("data-path", data.file.path)
+  
         summon_editor()
       })
     }
@@ -139,10 +140,18 @@ $(function(){
     return $(self).find("a").attr("rel")
   }
   
+  $("body").live('click', function(){
+    $("#filelist #pane").fadeOut('fast')
+  })
+  
   // right click (new file / new folder / delete file)
   $('#filetree li').live("mousedown", function(event) {
     
-    
+    if ($(this).hasClass("directory"))
+      $("#filelist .delete").html("Delete directory")
+    else
+      $("#filelist .delete").html("Delete file")
+      
     if (event.which == 3) { // right click
       path = detect_path(this)
       // console.log(path)
@@ -150,7 +159,7 @@ $(function(){
       $("#filelist #pane").fadeIn("fast")
       $("#filelist #pane").css("left", event.pageX-20)
       $("#filelist #pane").css("top", event.pageY-70)
-    } else {
+    } else {      
       $("#filelist #pane").fadeOut('fast')
     }
     
@@ -159,14 +168,14 @@ $(function(){
     return false
   })
   
-  $('#filetree li').live("contextmenu", function(event){
-    //console.log(event)
+  // suppress event in webkit
+  $('#filetree li').live("contextmenu", function(event){    
     event.stopPropagation()
     event.preventDefault()
     return false
   })
   
-  $('#filelist .new').live("click", function(event){
+  function get_path() {
     path = ""
     splits = $("#selection").attr("data-path").split(/\//)
     for (var i=0; i+1 < splits.length; i++) {
@@ -174,8 +183,18 @@ $(function(){
         path += "/" 
       path += splits[i]
     }
+  }
+  
+  $('#filelist .new_file').live("click", function(event){
+    path = get_path()
+    console.log("creating new file in: "+path)
+  })  
+    
+  $('#filelist .new_folder').live("click", function(event){
+    path = get_path()
     console.log("creating new folder in: "+path)
   })
+  
   $('#filelist .delete').live("click", function(event){
     path = $("#selection").attr("data-path")
     console.log("deleting: "+path)

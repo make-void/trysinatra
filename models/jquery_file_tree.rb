@@ -11,7 +11,7 @@ class JqueryFileTree
     @path = File.join(File.expand_path(@root), path)
     @dirs = []
     if File.exists?(@path)
-      Dir.entries(@path).each do |dir|
+      Dir.entries(@path).sort.each do |dir|
         if File.directory?(File.join(@path, dir)) && dir[0,1]!="."
           @dirs << dir
         end
@@ -25,7 +25,7 @@ class JqueryFileTree
     @path = File.join(File.expand_path(@root), path)
     @files = []
     if File.exists?(@path)
-      Dir.entries(@path).each do |file|
+      Dir.entries(@path).sort.each do |file|
         if File.file?(File.join(@path, file))
           @files << file
         end
