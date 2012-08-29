@@ -3,3 +3,4 @@
 .sqlite
 .pid
 public/projects_src/*
+.c9revisions
