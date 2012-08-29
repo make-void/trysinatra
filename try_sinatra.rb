@@ -1,6 +1,6 @@
-require 'haml'
-require 'sass'
-require 'sinatra'
+require 'bundler/setup'
+Bundler.require :default
+
 require 'json'
 enable :sessions
 
