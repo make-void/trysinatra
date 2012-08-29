@@ -4,3 +4,4 @@
 .pid
 public/projects_src/*
 .c9revisions
+.sass-cache/

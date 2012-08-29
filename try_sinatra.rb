@@ -24,9 +24,7 @@ class TrySinatra < Sinatra::Base
   require "#{APP_PATH}/config/env"
   
   set :haml, { :format => :html5 }
-  require 'rack-flash'
   enable :sessions
-  use Rack::Flash
   set :method_override, true
 
   def not_found(object=nil)
