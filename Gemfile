@@ -2,7 +2,6 @@ source "http://rubygems.org"
 
 gem 'haml'
 gem 'sinatra'
-gem 'rack-flash'
 gem 'sass'
 
 # gem 'dm-core'

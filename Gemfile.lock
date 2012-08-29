@@ -3,8 +3,6 @@ GEM
   specs:
     haml (3.1.7)
     rack (1.4.1)
-    rack-flash (0.1.2)
-      rack
     rack-protection (1.2.0)
       rack
     sass (3.2.1)
@@ -20,7 +18,6 @@ PLATFORMS
 
 DEPENDENCIES
   haml
-  rack-flash
   sass
   sinatra
   voidtools
